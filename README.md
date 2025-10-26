@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Orion Next.js Starter
+
+An enterprise-grade Next.js 16 starter template with modern development tooling and best practices pre-configured.
+
+## Features
+
+- **Next.js 16** - Latest Next.js framework with App Router
+- **Tailwind CSS v4** - Utility-first CSS framework
+- **TypeScript** - Static type checking
+- **Shadcn UI** - Accessible UI components
+- **Framer Motion** - Production-ready animations
+- **Zod** - Schema validation
+- **Zustand** - State management
+- **TanStack Query** - Server state management
+- **Next Themes** - Dark mode support
+- **ESLint & Prettier** - Code linting and formatting
+- **Husky & Lint Staged** - Pre-commit hooks
+- **Commit Lint** - Conventional commit enforcement
+- **GitHub Actions** - CI/CD workflows
+- **Vitest & Playwright** - Testing framework
+- **Storybook** - Component documentation
+- **Better Auth** - Authentication solution
+- **React Hook Forms** - Form management
+- **MSW (Mock Service Worker)** - API mocking
+- **Yarn v4** - Modern package management
+- **Stylelint** - Style linting
+
+## Project Structure
+
+```
+/orion-next-starter
+├── .github/
+├── .husky/
+├── .storybook/
+├── public/
+├── src/
+│   ├── app/
+│   │   ├── (auth)/                     # Route group for auth pages
+│   │   │   ├── login/                  # Co-located page structure
+│   │   │   │   ├── components/         # Components ONLY for the login page
+│   │   │   │   │   └── login-form.tsx
+│   │   │   │   └── page.tsx
+│   │   │   ├── signup/
+│   │   │   │   └── page.tsx
+│   │   │   ├── forgot-password/
+│   │   │   │   └── page.tsx
+│   │   │   └── reset-password/
+│   │   │       └── page.tsx
+│   │   ├── (main)/                     # Route group for the main app (requires auth)
+│   │   │   ├── dashboard/
+│   │   │   │   ├── components/
+│   │   │   │   │   └── stats-card.tsx
+│   │   │   │   └── page.tsx
+│   │   │   ├── profile/
+│   │   │   │   └── page.tsx
+│   │   │   ├── settings/
+│   │   │   │   ├── components/
+│   │   │   │   │   ├── update-profile-form.tsx
+│   │   │   │   │   └── change-password-form.tsx
+│   │   │   │   └── page.tsx
+│   │   │   └── layout.tsx              # Layout specific to the main app (e.g., with sidebar)
+│   │   ├── api/
+│   │   │   └── auth/
+│   │   │       └── [...better-auth]/   # Route handler for better-auth
+│   │   │           └── route.ts
+│   │   ├── layout.tsx                  # Root layout (providers configured here)
+│   │   └── page.tsx                    # Homepage
+│   ├── components/
+│   │   ├── common/                     # Custom, highly reusable components
+│   │   │   ├── page-header/
+│   │   │   │   ├── index.ts            # -> export * from './page-header'
+│   │   │   │   └── page-header.tsx
+│   │   │   └── index.ts                # -> export * from './page-header'
+│   │   ├── forms/                      # Custom form elements (e.g., file uploader)
+│   │   ├── layouts/                    # Reusable layout wrappers (e.g., AuthLayout)
+│   │   ├── ui/                         # Unstyled shadcn components (Button, Input)
+│   │   └── index.ts                    # Main barrel file exporting all custom components
+│   ├── features/
+│   │   └── ...                         # Feature-based modules
+│   ├── lib/
+│   │   ├── auth.ts                     # better-auth configuration and options
+│   │   ├── query-client.ts
+│   │   ├── store.ts
+│   │   └── utils.ts
+│   ├── hooks/
+│   │   └── index.ts                    # Export hooks for easy importing
+│   ├── providers/
+│   │   └── index.ts                    # Export all providers for app layout
+│   ├── styles/
+│   │   └── globals.css
+│   └── types/
+│       └── global.d.ts                 # Global TypeScript declarations
+├── tests-e2e/
+├── msw/                                # Mock Service Worker setup
+│   ├── db/                             # Mock data and factories
+│   │   ├── index.ts
+│   │   └── user.ts                     # e.g., mock user data factory
+│   ├── handlers/                       # Mock API route handlers
+│   │   ├── auth.ts                     # Mock auth endpoints
+│   │   ├── user.ts                     # Mock user endpoints
+│   │   └── index.ts                    # Barrel file exporting all handlers
+│   └── index.ts                        # Main MSW setup (browser/server)
+```
 
 ## Getting Started
 
-First, run the development server:
-
+1. Install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Run the development server:
+```bash
+yarn dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Scripts
 
-## Learn More
+- `yarn dev` - Start development server
+- `yarn build` - Build for production
+- `yarn start` - Start production server
+- `yarn lint` - Run ESLint
 
-To learn more about Next.js, take a look at the following resources:
+## Contributing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project follows conventional commits and code of conduct. Please read our contributing guidelines before submitting pull requests.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License.
