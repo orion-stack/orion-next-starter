@@ -7,9 +7,11 @@ The Orion Next.js Starter is a comprehensive, production-ready template designed
 ## 2. Project Overview
 
 ### 2.1 Mission Statement
+
 To provide a comprehensive, opinionated starter template that enables teams to begin development on new projects with industry-standard best practices, optimized tooling, and proven architectural patterns.
 
 ### 2.2 Goals and Objectives
+
 - Reduce time-to-market for new web applications by 70%
 - Establish consistent development patterns across all projects
 - Provide a scalable, maintainable foundation for enterprise applications
@@ -17,6 +19,7 @@ To provide a comprehensive, opinionated starter template that enables teams to b
 - Ensure code quality, security, and performance standards
 
 ### 2.3 Success Metrics
+
 - Time to first production deployment under 2 weeks
 - 90%+ code coverage maintained across all projects
 - Consistent security audit results with 0 critical vulnerabilities
@@ -25,12 +28,14 @@ To provide a comprehensive, opinionated starter template that enables teams to b
 ## 3. Target Audience
 
 ### 3.1 Primary Users
+
 - Full-stack developers working on React/Next.js applications
 - Engineering teams looking to standardize their tech stack
 - Startups needing a production-ready foundation
 - Enterprises migrating to modern web stack
 
 ### 3.2 Secondary Users
+
 - Product managers evaluating development frameworks
 - DevOps teams implementing CI/CD pipelines
 - QA engineers setting up testing strategies
@@ -38,26 +43,31 @@ To provide a comprehensive, opinionated starter template that enables teams to b
 ## 4. Technical Specifications
 
 ### 4.1 Core Technologies
+
 - **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4
 - **Package Manager**: Yarn v4 (with Zero-Installs)
 
 ### 4.2 UI Components
+
 - **Component Library**: Shadcn UI
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
 
 ### 4.3 State Management
+
 - **Client State**: Zustand
 - **Server State**: TanStack Query (React Query)
 
 ### 4.4 Authentication & Security
+
 - **Authentication**: Better Auth
 - **Form Validation**: React Hook Forms + Zod
 - **Type Safety**: Full TypeScript coverage
 
 ### 4.5 Development Experience
+
 - **Code Quality**: ESLint, Prettier, Stylelint
 - **Commit Standards**: Commit Lint with conventional commits
 - **Pre-commit Hooks**: Husky + Lint Staged
@@ -65,12 +75,14 @@ To provide a comprehensive, opinionated starter template that enables teams to b
 - **API Mocking**: MSW (Mock Service Worker)
 
 ### 4.6 Deployment & DevOps
+
 - **CI/CD**: GitHub Actions
 - **Theme Management**: Next Themes (dark/light mode)
 
 ## 5. Architecture
 
 ### 5.1 Project Structure
+
 ```
 /orion-next-starter
 ├── .github/
@@ -159,12 +171,14 @@ To provide a comprehensive, opinionated starter template that enables teams to b
 ```
 
 ### 5.2 Component Architecture
+
 - **UI Components**: Shadcn UI components for consistent, accessible UI elements
 - **Business Components**: Custom components built for specific business logic
 - **Layout Components**: Reusable layout wrappers for consistent page structures
 - **Data Components**: Components that handle data fetching and presentation
 
 ### 5.3 State Management Strategy
+
 - **Local State**: React useState and useReducer for component-level state
 - **Global State**: Zustand for application-wide state
 - **Server State**: TanStack Query for server data caching, synchronization, and updates
@@ -173,24 +187,28 @@ To provide a comprehensive, opinionated starter template that enables teams to b
 ## 6. Development Workflow
 
 ### 6.1 Code Standards
+
 - All code must pass ESLint and Stylelint checks
 - TypeScript strict mode enabled
 - 100% component documentation in Storybook
 - Minimum 80% code coverage for new features
 
 ### 6.2 Git Workflow
+
 - Feature branch workflow
 - Conventional commits enforced
 - Pull requests required for all changes
 - Automated testing before merge
 
 ### 6.3 Testing Strategy
+
 - Unit tests with Vitest
 - Integration tests for complex components and hooks
 - End-to-end tests with Playwright
 - Visual regression testing with Storybook
 
 ### 6.4 Deployment Pipeline
+
 - Automated testing on pull requests
 - Preview deployments for all pull requests
 - Production deployment on main branch merge
@@ -199,18 +217,21 @@ To provide a comprehensive, opinionated starter template that enables teams to b
 ## 7. Security Considerations
 
 ### 7.1 Authentication
+
 - OAuth 2.0 / OpenID Connect ready
 - Secure session management
 - Password policies and requirements
 - Multi-factor authentication support
 
 ### 7.2 Data Protection
+
 - Input sanitization and validation
 - SQL injection protection
 - XSS prevention through proper escaping
 - Secure headers configuration
 
 ### 7.3 API Security
+
 - Rate limiting
 - Authentication token validation
 - API key management
@@ -219,12 +240,14 @@ To provide a comprehensive, opinionated starter template that enables teams to b
 ## 8. Performance Requirements
 
 ### 8.1 Performance Targets
+
 - Page load time < 3 seconds on 3G
 - Time to Interactive < 5 seconds
 - Core Web Vitals scores in green zone
 - Bundle size < 250KB JavaScript
 
 ### 8.2 Optimization Strategies
+
 - Code splitting and lazy loading
 - Image optimization with Next.js Image
 - Static site generation where possible
@@ -233,12 +256,14 @@ To provide a comprehensive, opinionated starter template that enables teams to b
 ## 9. Maintenance and Support
 
 ### 9.1 Versioning Strategy
+
 - Semantic versioning (MAJOR.MINOR.PATCH)
 - Feature releases monthly
 - Security patches as needed
 - Long-term support versions
 
 ### 9.2 Documentation Requirements
+
 - Code documentation with JSDoc
 - Architecture decision records
 - API documentation
@@ -247,6 +272,7 @@ To provide a comprehensive, opinionated starter template that enables teams to b
 ## 10. Dependencies and Technology Stack
 
 ### 10.1 Frontend Dependencies
+
 - Next.js 16
 - React 19
 - TypeScript 5
@@ -260,6 +286,7 @@ To provide a comprehensive, opinionated starter template that enables teams to b
 - Next Themes
 
 ### 10.2 Development Dependencies
+
 - ESLint
 - Prettier
 - Vitest

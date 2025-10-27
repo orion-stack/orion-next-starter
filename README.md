@@ -105,11 +105,13 @@ An enterprise-grade Next.js 16 starter template with modern development tooling 
 ## Getting Started
 
 1. Install dependencies:
+
 ```bash
 yarn install
 ```
 
 2. Run the development server:
+
 ```bash
 yarn dev
 ```
