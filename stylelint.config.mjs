@@ -1,4 +1,23 @@
 /** @type {import("stylelint").Config} */
 export default {
-  "extends": ["stylelint-config-standard"]
+  "extends": ["stylelint-config-standard"],
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "tailwind",
+          "apply",
+          "layer",
+          "config",
+          "theme",
+          "screen",
+          "variants",
+          "responsive",
+          "custom-variant",
+          "container"
+        ]
+      }
+    ]
+  }
 };
