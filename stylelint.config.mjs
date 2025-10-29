@@ -18,6 +18,7 @@ export default {
           "container"
         ]
       }
-    ]
+    ],
+    "import-notation": "string"
   }
 };
