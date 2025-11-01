@@ -17,7 +17,15 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: "./vitest.setup.ts",
+    include: ['**/*.test.{ts,tsx}'],
+    exclude: ['tests-e2e/**', 'node_modules/**', 'dist/**'],
     projects: [
+      {
+        name: 'unit',
+        include: ['tests/unit/**/*.test.{ts,tsx}'],
+        environment: 'node',
+        setupFiles: ['./tests/unit/msw.setup.ts'],
+      },
       {
         extends: true,
         plugins: [
@@ -28,7 +36,7 @@ export default defineConfig({
           }),
         ],
         test: {
-          name: "storybook",
+          name: 'storybook',
           browser: {
             enabled: true,
             headless: true,

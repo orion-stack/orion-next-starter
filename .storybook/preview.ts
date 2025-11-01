@@ -1,4 +1,8 @@
 import type { Preview } from "@storybook/nextjs-vite";
+import { initialize, mswLoader } from "msw-storybook-addon";
+
+// Initialize MSW for Storybook
+initialize();
 
 const preview: Preview = {
   parameters: {
@@ -16,6 +20,9 @@ const preview: Preview = {
       test: "todo",
     },
   },
+
+  // Add the MSW loader to enable API mocking in stories
+  loaders: [mswLoader],
 };
 
 export default preview;
