@@ -82,46 +82,26 @@ The page will be accessible at `/about`.
 
 ## Adding New Components
 
-### Creating a New UI Component
+The project has two main directories for components:
 
-1. Create your component in the `components/` directory
-2. For reusable UI components, place them in `components/ui/`
-3. For custom components, create a new subdirectory
+- `components/ui`: This directory contains raw UI components installed via the Shadcn CLI. **Do not modify these files directly**, as they can be updated and overwritten by the CLI.
+- `components/custom`: This is where you will create your own custom components. These components often wrap and extend the functionality of the base components from `components/ui`.
 
-Example: Creating a Card component
-
-```tsx
-// components/ui/card.tsx
-import { cn } from "@/lib/utils";
-
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-export function Card({ className, ...props }: CardProps) {
-  return (
-    <div
-      className={cn(
-        "rounded-xl border bg-card text-card-foreground shadow",
-        className,
-      )}
-      {...props}
-    />
-  );
-}
-```
+See the section on [Creating Custom Components](#creating-custom-components) for a detailed guide on how to structure your custom components.
 
 ### Using Shadcn Components
 
-The project comes with Shadcn UI preconfigured. To add new Shadcn components:
+The project comes with Shadcn UI preconfigured. To add new Shadcn components to the `components/ui` directory, run the following command:
 
 ```bash
-npx shadcn-ui@latest add [component-name]
+yarn dlx shadcn-ui@latest add [component-name]
 ```
 
 Examples:
 
-- `npx shadcn-ui@latest add button`
-- `npx shadcn-ui@latest add card`
-- `npx shadcn-ui@latest add input`
+- `yarn dlx shadcn-ui@latest add button`
+- `yarn dlx shadcn-ui@latest add card`
+- `yarn dlx shadcn-ui@latest add input`
 
 ## Adding New Routes
 
@@ -152,44 +132,166 @@ This creates routes:
 - `/dashboard/settings`
 - `/blog/[slug]` (dynamic route)
 
+## Creating Custom Components
+
+Custom components should be placed in the `components/custom` directory. Each component should have its own folder containing all related files.
+
+### File Structure
+
+For a new `AwesomeButton` component, the structure should be:
+
+```
+components/
+└── custom/
+    └── awesome-button/
+        ├── awesome-button.tsx
+        ├── awesome-button.module.scss
+        ├── awesome-button.test.tsx
+        ├── awesome-button.story.tsx
+        └── index.ts
+```
+
+- `awesome-button.tsx`: The component itself, likely importing and wrapping a base component from `components/ui`.
+- `awesome-button.module.scss`: Component-specific styles.
+- `awesome-button.test.tsx`: Unit tests for the component.
+- `awesome-button.story.tsx`: Storybook story for the component.
+- `index.ts`: Barrel file to export the component (`export * from './awesome-button'`).
+
+### Example: Creating a Custom Button
+
+1.  **Component (`awesome-button.tsx`):**
+
+    ```tsx
+    import { Button as ShadcnButton } from "@/components/ui/button";
+    import type { ButtonProps } from "@/components/ui/button";
+    import styles from "./awesome-button.module.scss";
+
+    export const AwesomeButton = ({ className, ...props }: ButtonProps) => {
+      const combinedClassName =
+        `${styles.customButton} ${className || ""}`.trim();
+
+      return <ShadcnButton className={combinedClassName} {...props} />;
+    };
+    ```
+
+2.  **Styles (`awesome-button.module.scss`):**
+
+    ```scss
+    .customButton {
+      border: 2px solid #0070f3;
+      box-shadow: 0 4px 14px 0 rgba(0, 118, 255, 0.39);
+    }
+    ```
+
+3.  **Test (`awesome-button.test.tsx`):**
+
+    ```tsx
+    import { render, screen } from "@testing-library/react";
+    import { AwesomeButton } from "./awesome-button";
+    import styles from "./awesome-button.module.scss";
+
+    describe("AwesomeButton", () => {
+      it("should render with the custom class", () => {
+        render(<AwesomeButton>Click me</AwesomeButton>);
+        const button = screen.getByRole("button");
+        expect(button).toHaveClass(styles.customButton);
+      });
+    });
+    ```
+
+4.  **Story (`awesome-button.story.tsx`):**
+
+    ```tsx
+    import type { Meta, StoryObj } from "@storybook/react";
+    import { AwesomeButton } from "./awesome-button";
+
+    const meta: Meta<typeof AwesomeButton> = {
+      title: "Custom/AwesomeButton",
+      component: AwesomeButton,
+    };
+
+    export default meta;
+    type Story = StoryObj<typeof AwesomeButton>;
+
+    export const Default: Story = {
+      args: {
+        children: "Awesome Button",
+      },
+    };
+    ```
+
+5.  **Index (`index.ts`):**
+
+    ```ts
+    export * from "./awesome-button";
+    ```
+
 ## Testing
 
 ### Running Tests
 
-- Run all tests: `yarn test`
-- Run tests in watch mode: `yarn test --watch`
-- Run unit tests: `yarn test tests/unit/`
-- Run Storybook tests: `yarn test --project=storybook`
+- Run all unit tests: `yarn test:unit`
+- Run unit tests in watch mode: `yarn test:unit:watch`
+- Run all end-to-end tests: `yarn test:e2e`
+- Run all tests (unit and e2e) in CI mode: `yarn test:ci`
 
 ### Writing Tests
 
+Unit and component tests are co-located with the files they test. For a component like `MyComponent.tsx`, the test file should be named `MyComponent.test.tsx` and placed in the same directory.
+
 #### Unit Tests
 
-Place unit tests in `tests/unit/` directory:
+Here is an example of a unit test for a utility function in `lib/utils.ts`:
 
 ```tsx
-// tests/unit/example.test.ts
+// lib/utils.test.ts
 import { describe, it, expect } from "vitest";
+import { cn } from "./utils";
 
-describe("Example component", () => {
-  it("should work correctly", () => {
-    expect(1 + 1).toBe(2);
+describe("cn utility", () => {
+  it("should merge class names correctly", () => {
+    expect(cn("bg-red-500", "text-white")).toBe("bg-red-500 text-white");
   });
 });
 ```
 
 #### Component Tests
 
-Use React Testing Library for component testing:
+Use React Testing Library for component testing. Here is an example for a `Button` component:
 
 ```tsx
-// components/Button.test.tsx
+// components/ui/Button.test.tsx
 import { render, screen } from "@testing-library/react";
 import { Button } from "./Button";
 
 it("renders button with text", () => {
   render(<Button>Click me</Button>);
   expect(screen.getByText("Click me")).toBeInTheDocument();
+});
+```
+
+#### End-to-End Tests
+
+Place end-to-end tests in the `tests-e2e/` directory. These tests use Playwright to simulate user interactions in a real browser.
+
+```ts
+// tests-e2e/example.spec.ts
+import { test, expect } from "@playwright/test";
+
+test("has title", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(page).toHaveTitle(/Create Next App/);
+});
+
+test("has heading", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(
+    page.getByRole("heading", {
+      name: "To get started, edit the page.tsx file.",
+    }),
+  ).toBeVisible();
 });
 ```
 

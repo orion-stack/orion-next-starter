@@ -2,8 +2,10 @@ import { expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Page from "./page";
 
-test("Home Page", () => {
-  render(<Page />);
+test("Home Page", async () => {
+  // Page is an async server component, so we need to await it
+  const PageComponent = await Page({});
+  render(PageComponent);
 
   // Test for the main heading
   expect(

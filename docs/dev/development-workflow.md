@@ -72,7 +72,7 @@ Run the quality checks:
 ```bash
 yarn lint
 yarn format
-yarn test --run
+yarn test:ci
 ```
 
 ### 5. Atomic Commits
@@ -199,10 +199,10 @@ When adding new tools/features, follow this pattern:
 
 ### Testing Standards
 
-- Unit tests for utility functions and business logic
-- Component tests for UI components
-- Integration tests for feature workflows
-- End-to-end tests for critical user flows
+- Unit and component tests are co-located with the source files (e.g., `component.tsx` and `component.test.tsx`).
+- Unit tests for utility functions and business logic (Vitest)
+- Component tests for UI components (Vitest)
+- End-to-end tests for critical user flows (Playwright)
 - Minimum 80% code coverage for new features
 
 ### Documentation

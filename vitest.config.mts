@@ -16,40 +16,8 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "jsdom",
-    setupFiles: "./vitest.setup.ts",
-    include: ['**/*.test.{ts,tsx}'],
-    exclude: ['tests-e2e/**', 'node_modules/**', 'dist/**'],
-    projects: [
-      {
-        name: 'unit',
-        include: ['tests/unit/**/*.test.{ts,tsx}'],
-        environment: 'node',
-        setupFiles: ['./tests/unit/msw.setup.ts'],
-      },
-      {
-        extends: true,
-        plugins: [
-          // The plugin will run tests for the stories defined in your Storybook config
-          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
-          storybookTest({
-            configDir: path.join(dirname, ".storybook"),
-          }),
-        ],
-        test: {
-          name: 'storybook',
-          browser: {
-            enabled: true,
-            headless: true,
-            provider: playwright({}),
-            instances: [
-              {
-                browser: "chromium",
-              },
-            ],
-          },
-          setupFiles: [".storybook/vitest.setup.ts"],
-        },
-      },
-    ],
+    setupFiles: ["./vitest.setup.ts", "./msw/msw.setup.ts"],
+    include: ["app/**/*.test.{ts,tsx}", "lib/**/*.test.{ts,tsx}", "components/**/*.test.{ts,tsx}"],
+    exclude: ["node_modules", "dist", ".idea", ".git", ".cache", "tests-e2e"],
   },
 });

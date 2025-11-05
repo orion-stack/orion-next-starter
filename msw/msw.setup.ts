@@ -1,7 +1,7 @@
-// tests/unit/msw.setup.ts
+// msw/msw.setup.ts
 import { beforeAll, afterEach, afterAll } from "vitest";
 import { setupServer } from "msw/node";
-import { handlers } from "../../msw/handlers";
+import { handlers } from "./handlers";
 import { cleanup } from "@testing-library/react";
 
 // Set up MSW server for Node.js environment tests
