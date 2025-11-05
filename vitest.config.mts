@@ -9,7 +9,11 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: ["./vitest.setup.ts", "./msw/msw.setup.ts"],
-    include: ["app/**/*.test.{ts,tsx}", "lib/**/*.test.{ts,tsx}", "components/**/*.test.{ts,tsx}"],
+    include: [
+      "src/app/**/*.test.{ts,tsx}",
+      "src/lib/**/*.test.{ts,tsx}",
+      "src/components/**/*.test.{ts,tsx}",
+    ],
     exclude: ["node_modules", "dist", ".idea", ".git", ".cache", "tests-e2e"],
   },
 });
