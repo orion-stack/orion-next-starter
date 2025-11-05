@@ -2,28 +2,29 @@
 
 An enterprise-grade Next.js 16 starter template with modern development tooling and best practices pre-configured.
 
+## About This Starter: `orion-next-starter` (Base Template)
+
+This project serves as the minimal, unopinionated foundation for the Orion Next.js template family. It provides a complete set of professional development tools, a scalable project structure, and the initial setup for UI components. It intentionally omits specific choices for state management, data fetching, and authentication, allowing developers to integrate their preferred solutions or build upon this foundation with more specialized Orion templates (e.g., `orion-next-private`, `orion-next-saas`).
+
 ## Features
+
+The `orion-next-starter` comes with the following core features and tooling:
 
 - **Next.js 16** - Latest Next.js framework with App Router
 - **Tailwind CSS v4** - Utility-first CSS framework
 - **TypeScript** - Static type checking
-- **Shadcn UI** - Accessible UI components
+- **Shadcn UI** - Initialized and ready for adding accessible UI components
 - **Framer Motion** - Production-ready animations
-- **Zod** - Schema validation
-- **Zustand** - State management
-- **TanStack Query** - Server state management
 - **Next Themes** - Dark mode support
-- **ESLint & Prettier** - Code linting and formatting
-- **Husky & Lint Staged** - Pre-commit hooks
-- **Commit Lint** - Conventional commit enforcement
-- **GitHub Actions** - CI/CD workflows
-- **Vitest & Playwright** - Testing framework
-- **Storybook** - Component documentation
-- **Better Auth** - Authentication solution
-- **React Hook Forms** - Form management
-- **MSW (Mock Service Worker)** - API mocking
-- **Yarn v4** - Modern package management
-- **Stylelint** - Style linting
+- **ESLint & Prettier** - Code linting and formatting for consistent style
+- **Husky & Lint Staged** - Automate quality checks on staged files before commit
+- **Commitlint** - Enforce conventional commit message format
+- **GitHub Actions** - CI/CD workflows for automated testing and deployment
+- **Vitest & Playwright** - Comprehensive testing framework for unit, component, and end-to-end tests
+- **Storybook** - Configured for developing and documenting UI components in isolation
+- **MSW (Mock Service Worker)** - Set up for API mocking during development and testing
+- **Yarn v4** - Modern package management with Zero-Installs
+- **Stylelint** - Style linting for CSS/SCSS files
 
 ## Project Structure
 
