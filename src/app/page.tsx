@@ -1,43 +1,65 @@
+"use client";
 import Image from "next/image";
-import { Button, ThemeToggle, Rotate } from "@/components/custom";
+import { Button, ThemeToggle } from "@/components/custom"; // Removed Rotate import
+import { motion } from "motion/react"; // Import motion from the new library
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <div className="flex w-full justify-end">
+    <div className="flex min-h-screen items-center justify-center bg-white font-sans dark:bg-black">
+      {/* 
+        Adjust min-h-screen on main to account for the removed element, 
+        giving a bit more space for the content above the buttons,
+        but keeping the original 'justify-between' structure 
+        will still distribute content across the height.
+      */}
+      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 sm:items-start">
+        {/* IMPROVED TOP BAR: Logo on the left, ThemeToggle on the right. Logo size updated. */}
+        <div className="flex w-full justify-between items-center">
+          <Image
+            className="dark:invert"
+            src="/assets/images/logo.svg"
+            alt="Orion Starter Logo"
+            width={35}
+            height={35}
+            priority
+          />
           <ThemeToggle />
         </div>
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
+
+        {/* ROCKET IMAGE: Centered with Floating Animation */}
+        <div className="flex w-full justify-center">
+          <motion.div
+            animate={{ y: [0, -15, 0] }} // Animate the y-axis to create a float effect
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+              repeatType: "reverse", // Smoothly reverse the animation
+            }}
+          >
+            <Image
+              src="/assets/images/rocket.png"
+              alt="Rocket"
+              width={200}
+              height={200}
+              priority
+            />
+          </motion.div>
+        </div>
+
+        {/* TEXT CONTENT (Original structure maintained) */}
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+            Welcome to Orion Next.js Starter
           </h1>
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+            Your production-ready starter template with all essential features
+            pre-configured. Get started quickly with the latest Next.js 16,
+            TypeScript, Tailwind CSS, and more.
           </p>
         </div>
+
+        {/* BUTTONS (Original structure maintained) */}
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
           <Button asChild>
             <a
@@ -64,7 +86,8 @@ export default function Home() {
             Documentation
           </a>
         </div>
-        <Rotate />
+
+        {/* ROTATE component removed */}
       </main>
     </div>
   );
