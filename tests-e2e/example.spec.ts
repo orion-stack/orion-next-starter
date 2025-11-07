@@ -10,10 +10,10 @@ test("has title", async ({ page }) => {
 test("has heading", async ({ page }) => {
   await page.goto("/");
 
-  // Expects page to have a heading with the name of Installation.
+  // Expects page to have a heading with the new welcome message.
   await expect(
     page.getByRole("heading", {
-      name: "To get started, edit the page.tsx file.",
+      name: "Welcome to Orion Next.js Starter",
     }),
   ).toBeVisible();
 });
