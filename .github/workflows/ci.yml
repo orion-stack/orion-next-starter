@@ -1,0 +1,57 @@
+name: CI / Build & Test
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run linting
+        run: yarn lint
+
+      - name: Run type checking
+        run: tsc --noEmit
+
+      - name: Run unit tests
+        run: yarn test:unit:ci
+
+      - name: Build
+        run: yarn build
+        env:
+          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
+          NODE_ENV: production
+
+      - name: Install Playwright Browsers
+        run: yarn playwright install --with-deps
+
+      - name: Run E2E tests
+        run: |
+          # Start the Next.js dev server in the background
+          yarn dev &
+          # Wait for the server to be ready
+          npx wait-on http://localhost:3000 -t 60000
+          # Run Playwright tests
+          yarn test:e2e:ci
+        env:
+          CI: true
