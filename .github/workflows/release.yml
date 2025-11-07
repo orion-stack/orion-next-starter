@@ -1,0 +1,33 @@
+name: Semantic Release
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  release:
+    name: Semantic Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Required for semantic-release/git to analyze history and commit/push back
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Run Semantic Release
+        run: npx semantic-release
+        env:
+          # GITHUB_TOKEN is mandatory for this workflow
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
