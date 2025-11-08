@@ -2,7 +2,7 @@
 // User-related API request handlers
 
 import { http, HttpResponse } from "msw";
-import { users } from "../db/user";
+import { users, type User } from "../db/user";
 
 export const userHandlers = [
   http.get("/api/users", () => {
@@ -20,24 +20,27 @@ export const userHandlers = [
     return HttpResponse.json(user);
   }),
 
-  http.post("/api/users", async ({ request }) => {
+  http.post<never, User>("/api/users", async ({ request }) => {
     const newUser = await request.json();
     users.push({ ...newUser, id: users.length + 1 });
     return HttpResponse.json({ ...newUser, id: users.length }, { status: 201 });
   }),
 
-  http.put("/api/users/:id", async ({ params, request }) => {
-    const { id } = params;
-    const updatedUserData = await request.json();
-    const userIndex = users.findIndex((user) => user.id === Number(id));
+  http.put<never, Partial<User>>(
+    "/api/users/:id",
+    async ({ params, request }) => {
+      const { id } = params;
+      const updatedUserData = await request.json();
+      const userIndex = users.findIndex((user) => user.id === Number(id));
 
-    if (userIndex === -1) {
-      return new HttpResponse(null, { status: 404 });
-    }
+      if (userIndex === -1) {
+        return new HttpResponse(null, { status: 404 });
+      }
 
-    users[userIndex] = { ...users[userIndex], ...updatedUserData };
-    return HttpResponse.json(users[userIndex]);
-  }),
+      users[userIndex] = { ...users[userIndex], ...updatedUserData };
+      return HttpResponse.json(users[userIndex]);
+    },
+  ),
 
   http.delete("/api/users/:id", ({ params }) => {
     const { id } = params;
