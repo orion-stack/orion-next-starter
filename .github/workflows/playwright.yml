@@ -17,11 +17,23 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install --frozen-lockfile
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps
+      - name: Build
+        run: yarn build
+        env:
+          NODE_ENV: production
       - name: Run Playwright tests
-        run: yarn playwright test
+        run: |
+          # Start the production server in the background
+          yarn start &
+          # Wait for the server to be ready
+          npx wait-on http://localhost:3000 -t 60000
+          # Run Playwright tests
+          yarn test:e2e:ci
+        env:
+          CI: true
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
