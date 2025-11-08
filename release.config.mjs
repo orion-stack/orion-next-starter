@@ -3,18 +3,18 @@ module.exports = {
   branches: [
     "main",
     {
-      name: "dev", 
+      name: "dev",
       prerelease: true, // Tags releases from 'dev' as v1.0.0-dev.1
     },
   ],
-  
+
   plugins: [
     // 1. Analyze commits to determine the next version
     "@semantic-release/commit-analyzer",
-    
+
     // 2. Generate release notes content
     "@semantic-release/release-notes-generator",
-    
+
     // 3. Update the CHANGELOG.md file
     [
       "@semantic-release/changelog",
@@ -22,7 +22,7 @@ module.exports = {
         changelogFile: "CHANGELOG.md",
       },
     ],
-    
+
     // 4. Commit the new version in package.json and the updated CHANGELOG.md
     [
       "@semantic-release/git",
@@ -33,7 +33,7 @@ module.exports = {
           "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
       },
     ],
-    
+
     // 5. Create a GitHub Release and tag
     "@semantic-release/github",
   ],
