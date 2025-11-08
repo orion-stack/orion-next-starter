@@ -6,7 +6,7 @@ Welcome to the Orion Next.js Starter! This guide will help you get started build
 
 ### Prerequisites
 
-- Node.js 18+ (recommended: Node.js 20+)
+- Node.js 24+ (required for semantic release)
 - Yarn package manager
 - Git
 
