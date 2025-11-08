@@ -1,6 +1,7 @@
 import { Button as ShadcnButton } from "@/components/ui/button";
-import type { ButtonProps } from "@/components/ui/button";
 import styles from "./button.module.scss";
+
+type ButtonProps = React.ComponentProps<typeof ShadcnButton>;
 
 export const Button = ({ className, ...props }: ButtonProps) => {
   const combinedClassName =

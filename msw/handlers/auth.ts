@@ -4,8 +4,13 @@
 import { http, HttpResponse } from "msw";
 import { users } from "../db/user";
 
+interface LoginRequestBody {
+  email: string;
+  password?: string;
+}
+
 export const authHandlers = [
-  http.post("/api/auth/login", async ({ request }) => {
+  http.post<never, LoginRequestBody>("/api/auth/login", async ({ request }) => {
     const { email, password } = await request.json();
 
     // Find user by email
