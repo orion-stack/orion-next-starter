@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   // Define branches: 'main' for stable, 'dev' for pre-releases
   branches: [
     "main",
