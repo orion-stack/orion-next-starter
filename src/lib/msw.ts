@@ -1,7 +1,7 @@
 // lib/msw.ts
 // MSW setup for development environment
 
-import { worker } from "../msw/browser";
+import { worker } from "../../msw/browser";
 
 // In development, start the browser mocking
 export const initMsw = async () => {
