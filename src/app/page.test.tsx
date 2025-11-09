@@ -6,10 +6,14 @@ import messages from "../../messages/en.json";
 
 // Mock getTranslations from next-intl/server
 vi.mock("next-intl/server", () => ({
-  getTranslations: async (namespace) => {
-    return (key) => {
+  getTranslations: async (namespace: keyof typeof messages) => {
+    return (key: string) => {
       // Basic key lookup for testing purposes
-      return messages[namespace]?.[key] || key;
+      const namespaceMessages = messages[namespace];
+      if (namespaceMessages && key in namespaceMessages) {
+        return namespaceMessages[key as keyof typeof namespaceMessages];
+      }
+      return key;
     };
   },
 }));
