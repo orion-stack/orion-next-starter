@@ -1,17 +1,26 @@
 "use client";
 
 import { ReactNode } from "react";
+import { NextIntlClientProvider } from "next-intl";
 import { ThemeProvider } from "./theme-provider";
 
-export const Providers = ({ children }: { children: ReactNode }) => {
+type Props = {
+  children: ReactNode;
+  messages: Record<string, unknown>;
+  locale?: string; // Add optional locale prop
+};
+
+export const Providers = ({ children, messages, locale = "en" }: Props) => {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      {children}
-    </ThemeProvider>
+    <NextIntlClientProvider messages={messages} locale={locale}>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        {children}
+      </ThemeProvider>
+    </NextIntlClientProvider>
   );
 };

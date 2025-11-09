@@ -13,6 +13,7 @@ The `orion-next-starter` comes with the following core features and tooling:
 - **Next.js 16** - Latest Next.js framework with App Router
 - **Tailwind CSS v4** - Utility-first CSS framework
 - **TypeScript** - Static type checking
+- **next-intl** - Internationalization for Next.js
 - **Shadcn UI** - Initialized and ready for adding accessible UI components
 - **Framer Motion** - Production-ready animations
 - **Next Themes** - Dark mode support
@@ -44,6 +45,132 @@ The `orion-next-starter` comes with the following core features and tooling:
 ├── msw/                  # Mock Service Worker setup
 ```
 
+## Internationalization (i18n) with `next-intl`
+
+This starter is configured with `next-intl` for internationalization. It supports both Server and Client Components, allowing you to build a fully localized application.
+
+### Message Storage
+
+Translation messages are stored in JSON files under the `messages/` directory. Each file corresponds to a locale (e.g., `en.json`, `fr.json`).
+
+```json
+// messages/en.json
+{
+  "HomePage": {
+    "title": "Welcome to Orion Next.js Starter",
+    "description": "Your production-ready starter template..."
+  }
+}
+```
+
+### Usage in Server Components
+
+In Server Components, use the `getTranslations` function to access translations. This is the recommended approach for pages and layouts.
+
+```tsx
+// src/app/page.tsx
+import { getTranslations } from "next-intl/server";
+
+export default async function HomePage() {
+  const t = await getTranslations("HomePage");
+  return <h1>{t("title")}</h1>;
+}
+```
+
+### Usage in Client Components
+
+In Client Components, use the `useTranslations` hook. Make sure the component has the `"use client";` directive.
+
+```tsx
+// src/components/custom/language-switcher.tsx
+"use client";
+
+import { useTranslations } from "next-intl";
+
+export function LanguageSwitcher() {
+  const t = useTranslations("LanguageSwitcher");
+  return <label>{t("label")}</label>;
+}
+```
+
+### Writing Tests for i18n
+
+Testing components that use `next-intl` requires a bit of setup, especially for Server Components or components that use navigation hooks.
+
+#### Testing Server Components
+
+When testing Server Components that use `getTranslations`, you need to mock the `next-intl/server` module in your test file.
+
+```tsx
+// src/app/page.test.tsx
+import { expect, test, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
+import Page from "./page";
+import messages from "../../messages/en.json";
+
+// Mock getTranslations from next-intl/server
+vi.mock("next-intl/server", () => ({
+  getTranslations: async (namespace) => {
+    return (key) => {
+      return messages[namespace]?.[key] || key;
+    };
+  },
+}));
+
+test("Home Page", async () => {
+  const PageComponent = await Page();
+  render(PageComponent);
+  expect(
+    screen.getByText("Welcome to Orion Next.js Starter"),
+  ).toBeInTheDocument();
+});
+```
+
+#### Testing Client Components
+
+For Client Components that use hooks like `useTranslations`, `useLocale`, or `useRouter`, you need to wrap your component in `NextIntlClientProvider` and mock the necessary hooks from `next/navigation`.
+
+```tsx
+// src/app/page.test.tsx (covering client components within the page)
+import { expect, test, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { NextIntlClientProvider } from "next-intl";
+import Page from "./page";
+import messages from "../../messages/en.json";
+
+// Mock next/navigation for components using useRouter, usePathname, etc.
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: vi.fn(),
+    replace: vi.fn(),
+    refresh: vi.fn(),
+  }),
+  usePathname: () => "/",
+  useSearchParams: () => new URLSearchParams(),
+}));
+
+// Mock getTranslations for the server component part
+vi.mock("next-intl/server", () => ({
+  getTranslations: async (namespace) => (key) =>
+    messages[namespace]?.[key] || key,
+}));
+
+test("Home Page with Client Components", async () => {
+  const PageComponent = await Page();
+  render(
+    <NextIntlClientProvider locale="en" messages={messages}>
+      {PageComponent}
+    </NextIntlClientProvider>,
+  );
+
+  // Assert content from both server and client components
+  expect(
+    screen.getByText("Welcome to Orion Next.js Starter"),
+  ).toBeInTheDocument();
+  expect(screen.getByLabelText("Language")).toBeInTheDocument();
+});
+```
+
 ## Getting Started
 
 1. Install dependencies:
@@ -70,6 +197,26 @@ yarn dev
 ## Contributing
 
 This project follows conventional commits and code of conduct. Please read our contributing guidelines before submitting pull requests.
+
+## Semantic Release
+
+This project uses semantic release for automated versioning and publishing. The version is automatically bumped based on commit messages following conventional commit format.
+
+### Commit Format
+
+- `fix:` - Patches (0.1.0 → 0.1.1)
+- `feat:` - Minor releases (0.1.0 → 0.2.0)
+- `BREAKING CHANGE:` - Major releases (0.1.0 → 1.0.0)
+
+### Example Commits
+
+```bash
+git commit -m "feat: add new authentication module"
+git commit -m "fix: resolve memory leak in data fetcher"
+git commit -m "refactor: update component structure with breaking changes
+
+BREAKING CHANGE: This changes the component API"
+```
 
 ## MSW (Mock Service Worker) Usage
 
