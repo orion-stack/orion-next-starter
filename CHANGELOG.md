@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/orion-stack/orion-next-starter/compare/v1.0.0...v1.1.0) (2025-11-09)
+
+### Features
+
+- **i18n:** add internationalization support with language switcher ([f2b91bb](https://github.com/orion-stack/orion-next-starter/commit/f2b91bbe54d8fea3b51b3fe95037b6ce759763fb))
+- **i18n:** add internationalization support with language switcher ([95f7eef](https://github.com/orion-stack/orion-next-starter/commit/95f7eeffae0b0312266aa444ac7515fc7f937bd4))
+- **layout:** update metadata with proper project information ([468f0fc](https://github.com/orion-stack/orion-next-starter/commit/468f0fc630e7e835496c82ea87253fa8c7b3fed6))
+
 # 1.0.0 (2025-11-09)
 
 ### Bug Fixes
