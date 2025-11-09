@@ -70,9 +70,9 @@ Before committing, ensure:
 Run the quality checks:
 
 ```bash
-yarn lint
-yarn format
-yarn test --run
+yarn lint:ci
+yarn format:ci
+yarn test:ci
 ```
 
 ### 5. Atomic Commits
