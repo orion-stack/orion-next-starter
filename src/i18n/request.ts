@@ -9,9 +9,9 @@ export default getRequestConfig(async () => {
   const store = await cookies();
   const localeFromCookie = store.get("locale")?.value;
 
-  // Validate the locale
+  // Validate the locale and ensure it's always a string
   const locale = locales.includes(localeFromCookie || "")
-    ? localeFromCookie
+    ? localeFromCookie || "en"
     : "en";
 
   return {

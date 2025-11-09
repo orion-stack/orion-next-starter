@@ -1,4 +1,4 @@
-export default {
+const config = {
   // Define branches: 'main' for stable, 'dev' for pre-releases
   branches: [
     "main",
@@ -38,3 +38,5 @@ export default {
     "@semantic-release/github",
   ],
 };
+
+export default config;

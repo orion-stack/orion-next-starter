@@ -1,17 +1,21 @@
-"use client";
 import Image from "next/image";
-import { Button, ThemeToggle, LanguageSwitcher } from "@/components/custom"; // Removed Rotate import
-import { motion } from "motion/react"; // Import motion from the new library
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import {
+  Button,
+  ThemeToggle,
+  LanguageSwitcher,
+  AnimatedRocket,
+} from "@/components/custom"; // Removed Rotate import
 
-export default function Home() {
-  const t = useTranslations("HomePage");
+export default async function Home() {
+  const t = await getTranslations("HomePage");
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-white font-sans dark:bg-black">
-      {/* 
-        Adjust min-h-screen on main to account for the removed element, 
+      {/*
+        Adjust min-h-screen on main to account for the removed element,
         giving a bit more space for the content above the buttons,
-        but keeping the original 'justify-between' structure 
+        but keeping the original 'justify-between' structure
         will still distribute content across the height.
       */}
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 sm:items-start">
@@ -33,23 +37,7 @@ export default function Home() {
 
         {/* ROCKET IMAGE: Centered with Floating Animation */}
         <div className="flex w-full justify-center">
-          <motion.div
-            animate={{ y: [0, -15, 0] }} // Animate the y-axis to create a float effect
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-              repeatType: "reverse", // Smoothly reverse the animation
-            }}
-          >
-            <Image
-              src="/assets/images/rocket.png"
-              alt="Rocket"
-              width={200}
-              height={200}
-              priority
-            />
-          </motion.div>
+          <AnimatedRocket />
         </div>
 
         {/* TEXT CONTENT (Original structure maintained) */}
@@ -77,7 +65,7 @@ export default function Home() {
                 width={16}
                 height={16}
               />
-              Deploy Now
+              {t("deployButton")}
             </a>
           </Button>
           <a
