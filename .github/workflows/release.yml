@@ -10,6 +10,12 @@ jobs:
     name: Semantic Release
     runs-on: ubuntu-latest
 
+    # 1. ADD THIS PERMISSIONS BLOCK HERE
+    permissions:
+      contents: write # This is the crucial line!
+      issues: write # Recommended for creating/updating GitHub releases
+      pull-requests: write # Recommended for creating/updating GitHub releases
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
