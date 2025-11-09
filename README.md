@@ -71,6 +71,26 @@ yarn dev
 
 This project follows conventional commits and code of conduct. Please read our contributing guidelines before submitting pull requests.
 
+## Semantic Release
+
+This project uses semantic release for automated versioning and publishing. The version is automatically bumped based on commit messages following conventional commit format.
+
+### Commit Format
+
+- `fix:` - Patches (0.1.0 → 0.1.1)
+- `feat:` - Minor releases (0.1.0 → 0.2.0)
+- `BREAKING CHANGE:` - Major releases (0.1.0 → 1.0.0)
+
+### Example Commits
+
+```bash
+git commit -m "feat: add new authentication module"
+git commit -m "fix: resolve memory leak in data fetcher"
+git commit -m "refactor: update component structure with breaking changes
+
+BREAKING CHANGE: This changes the component API"
+```
+
 ## MSW (Mock Service Worker) Usage
 
 Mock Service Worker (MSW) is integrated into this project for API mocking during development and testing.
