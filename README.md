@@ -49,8 +49,23 @@ yarn dlx shadcn@latest add button card dialog
 
 The project follows a specific organization pattern for components:
 
-- `/src/components/ui` - Contains all shadcn UI components and their dependencies
+- `/src/components/ui` - Contains all shadcn UI components and their dependencies (should not be modified)
 - `/src/components/custom` - Contains custom components built using shadcn primitives
+
+All custom components in the `/src/components/custom` folder should follow the component folder structure:
+
+**Component folders** (required for all components):
+
+```
+/src/components/custom/component-name/
+├── component-name.tsx          # Main component file
+├── component-name.test.tsx     # Component tests (if needed)
+├── component-name.stories.tsx  # Storybook stories (if needed)
+├── component-name.module.scss  # Component-specific styles (if needed)
+└── index.ts                    # Export file
+```
+
+Each component should have its own folder with an index.ts file that exports the component.
 
 ### Component Customization Guidelines
 
