@@ -18,12 +18,21 @@ vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(),
 }));
 
+/**
+ * @description Test suite for the LanguageSwitcher component.
+ */
 describe("LanguageSwitcher", () => {
+  /**
+   * @description Test case to ensure the component renders without crashing.
+   */
   it("renders without crashing", () => {
     render(<LanguageSwitcher />);
     expect(screen.getByRole("combobox")).toBeInTheDocument();
   });
 
+  /**
+   * @description Test case to ensure the language switcher has an accessible label.
+   */
   it("has accessible label", () => {
     render(<LanguageSwitcher />);
     expect(screen.getByText("label")).toBeInTheDocument();

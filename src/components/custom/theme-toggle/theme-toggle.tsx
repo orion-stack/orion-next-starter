@@ -11,6 +11,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+/**
+ * A theme toggle component that allows users to switch between light, dark, and system themes.
+ * It uses `next-themes` for theme management and Shadcn UI for the dropdown menu.
+ *
+ * @returns {React.ReactElement} The rendered theme toggle component.
+ */
 export function ThemeToggle() {
   const { setTheme } = useTheme();
 

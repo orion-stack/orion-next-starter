@@ -44,6 +44,14 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * The root layout for the application.
+ * It sets up the HTML structure, fonts, and providers.
+ *
+ * @param {object} props - The props for the component.
+ * @param {React.ReactNode} props.children - The content to render within the layout.
+ * @returns {Promise<React.ReactElement>} The rendered root layout.
+ */
 export default async function RootLayout({
   children,
 }: Readonly<{

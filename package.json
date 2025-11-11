@@ -22,7 +22,8 @@
     "test:unit:ci": "vitest run",
     "test:e2e:ci": "playwright test",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "docs": "typedoc"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.1.16",
@@ -81,6 +82,8 @@
     "stylelint": "^16.25.0",
     "stylelint-config-standard": "^39.0.1",
     "tailwindcss": "^4",
+    "typedoc": "^0.28.14",
+    "typedoc-plugin-markdown": "^4.9.0",
     "typescript": "^5",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^4.0.4",
