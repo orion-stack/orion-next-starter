@@ -11,7 +11,7 @@ describe("AnimatedRocket", () => {
    */
   it("renders without crashing", () => {
     render(<AnimatedRocket />);
-    const image = screen.getByAltText("Rocket");
+    const image = screen.getByAltText("Rocket") as HTMLImageElement;
     expect(image).toBeInTheDocument();
     expect(image.src).toContain("rocket.png");
   });
