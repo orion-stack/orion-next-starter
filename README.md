@@ -15,7 +15,7 @@ The `orion-next-starter` comes with the following core features and tooling:
 - **TypeScript** - Static type checking
 - **next-intl** - Internationalization for Next.js
 - **Shadcn UI** - Initialized and ready for adding accessible UI components
-- **Framer Motion** - Production-ready animations
+- **Framer Motion** - Production-ready animations (available as `motion`)
 - **Next Themes** - Dark mode support
 - **ESLint & Prettier** - Code linting and formatting for consistent style
 - **Husky & Lint Staged** - Automate quality checks on staged files before commit
@@ -26,6 +26,135 @@ The `orion-next-starter` comes with the following core features and tooling:
 - **MSW (Mock Service Worker)** - Set up for API mocking during development and testing
 - **Yarn v4** - Modern package management with Zero-Installs
 - **Stylelint** - Style linting for CSS/SCSS files
+
+## UI Components with Shadcn UI
+
+This starter project is configured with Shadcn UI components. Here's how to work with UI components in this project:
+
+### Installing New Components
+
+To add new shadcn UI components, use the following command:
+
+```bash
+yarn dlx shadcn@latest add component1 component2 etc
+```
+
+For example:
+
+```bash
+yarn dlx shadcn@latest add button card dialog
+```
+
+### Component Organization
+
+The project follows a specific organization pattern for components:
+
+- `/src/components/ui` - Contains all shadcn UI components and their dependencies (should not be modified)
+- `/src/components/custom` - Contains custom components built using shadcn primitives
+
+All custom components in the `/src/components/custom` folder should follow the component folder structure:
+
+**Component folders** (required for all components):
+
+```
+/src/components/custom/component-name/
+├── component-name.tsx          # Main component file
+├── component-name.test.tsx     # Component tests (if needed)
+├── component-name.stories.tsx  # Storybook stories (if needed)
+├── component-name.module.scss  # Component-specific styles (if needed)
+└── index.ts                    # Export file
+```
+
+Each component should have its own folder with an index.ts file that exports the component.
+
+### Component Customization Guidelines
+
+**Important**: Never modify or customize components in the `/src/components/ui` folder. These are installed shadcn UI components that should remain pristine and unmodified to ensure future updates work correctly.
+
+Instead:
+
+1. Use the shadcn UI components from `/src/components/ui` in your custom components
+2. Create custom components in the `/src/components/custom` folder
+3. Build your custom components by composing and extending the shadcn components
+
+### Component Development Standards
+
+All custom components should follow these standards:
+
+#### Functional Components with Arrow Functions
+
+Use pure functional components with arrow function syntax:
+
+```tsx
+import { Button } from "@/components/ui/button";
+
+export const CustomButton = ({
+  children,
+  variant = "default",
+  onClick,
+}: {
+  children: React.ReactNode;
+  variant?: "default" | "secondary" | "destructive";
+  onClick?: () => void;
+}) => {
+  return (
+    <Button variant={variant} onClick={onClick}>
+      {children}
+    </Button>
+  );
+};
+```
+
+#### Direct Props Destructuring
+
+Always destructure props directly in the function signature:
+
+```tsx
+// ✅ Correct
+export const MyComponent = ({
+  title,
+  description,
+}: {
+  title: string;
+  description?: string;
+}) => {
+  return (
+    <div>
+      <h2>{title}</h2>
+      {description && <p>{description}</p>}
+    </div>
+  );
+};
+
+// ❌ Incorrect
+export const MyComponent = (props: { title: string; description?: string }) => {
+  return (
+    <div>
+      <h2>{props.title}</h2>
+      {props.description && <p>{props.description}</p>}
+    </div>
+  );
+};
+```
+
+#### Using Framer Motion for Animations
+
+The project includes the `motion` package (Framer Motion) for animations. You can use it in your custom components:
+
+```tsx
+import { motion } from "motion/react";
+import { Button } from "@/components/ui/button";
+
+export const AnimatedButton = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+      <Button>{children}</Button>
+    </motion.div>
+  );
+};
+```
+
+See the `AnimatedRocket` component in `/src/components/custom/animated-rocket.tsx` for a practical example of how to use the `motion` library in this project.
 
 ## Project Structure
 

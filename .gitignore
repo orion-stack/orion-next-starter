@@ -52,3 +52,8 @@ node_modules/
 
 *storybook.log
 storybook-static
+
+# TypeDoc documentation output
+/docs/typedoc
+
+init.txt

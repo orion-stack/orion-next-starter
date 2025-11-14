@@ -11,6 +11,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+/**
+ * A language switcher component that allows users to change the application's locale.
+ * It updates a cookie and refreshes the page to apply the new language.
+ *
+ * @returns {React.ReactElement} The rendered language switcher component.
+ */
 export function LanguageSwitcher() {
   const locale = useLocale();
   const t = useTranslations("LanguageSwitcher");

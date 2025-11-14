@@ -4,6 +4,12 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Button } from "@/components/custom";
 
+/**
+ * A component that displays translated content for the home page, including a title, description, and action buttons.
+ * It uses `next-intl` for translation.
+ *
+ * @returns {React.ReactElement} The rendered translated content component.
+ */
 export function TranslatedContent() {
   const t = useTranslations("HomePage");
 

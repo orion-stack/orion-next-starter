@@ -5,21 +5,20 @@ import {
   ThemeToggle,
   LanguageSwitcher,
   AnimatedRocket,
-} from "@/components/custom"; // Removed Rotate import
+} from "@/components/custom";
 
+/**
+ * The main landing page of the application.
+ *
+ * @returns {Promise<React.ReactElement>} The rendered home page.
+ */
 export default async function Home() {
   const t = await getTranslations("HomePage");
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-white font-sans dark:bg-black">
-      {/*
-        Adjust min-h-screen on main to account for the removed element,
-        giving a bit more space for the content above the buttons,
-        but keeping the original 'justify-between' structure
-        will still distribute content across the height.
-      */}
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 sm:items-start">
-        {/* IMPROVED TOP BAR: Logo on the left, LanguageSwitcher and ThemeToggle on the right. Logo size updated. */}
+        {/* Top bar with logo and theme/language switchers */}
         <div className="flex w-full justify-between items-center">
           <Image
             className="dark:invert"
@@ -35,12 +34,12 @@ export default async function Home() {
           </div>
         </div>
 
-        {/* ROCKET IMAGE: Centered with Floating Animation */}
+        {/* Animated rocket image */}
         <div className="flex w-full justify-center">
           <AnimatedRocket />
         </div>
 
-        {/* TEXT CONTENT (Original structure maintained) */}
+        {/* Page title and description */}
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
             {t("title")}
@@ -50,7 +49,7 @@ export default async function Home() {
           </p>
         </div>
 
-        {/* BUTTONS (Original structure maintained) */}
+        {/* Action buttons */}
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
           <Button asChild>
             <a
@@ -77,8 +76,6 @@ export default async function Home() {
             {t("documentationButton")}
           </a>
         </div>
-
-        {/* ROTATE component removed */}
       </main>
     </div>
   );

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import { Providers } from "@/providers";
-import { getMessages, getLocale } from "next-intl/server";
+import { getMessages, getLocale, getTimeZone } from "next-intl/server";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,6 +44,14 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * The root layout for the application.
+ * It sets up the HTML structure, fonts, and providers.
+ *
+ * @param {object} props - The props for the component.
+ * @param {React.ReactNode} props.children - The content to render within the layout.
+ * @returns {Promise<React.ReactElement>} The rendered root layout.
+ */
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -53,13 +61,14 @@ export default async function RootLayout({
   // side is the easiest way to get started
   const messages = await getMessages();
   const locale = await getLocale();
+  const timeZone = await getTimeZone();
 
   return (
     <html lang={locale}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers messages={messages} locale={locale}>
+        <Providers messages={messages} locale={locale} timeZone={timeZone}>
           {children}
         </Providers>
       </body>
