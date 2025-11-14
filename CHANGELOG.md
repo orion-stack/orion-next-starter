@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/orion-stack/orion-next-starter/compare/v1.1.0...v1.2.0) (2025-11-14)
+
+### Features
+
+- **comments:** improve code documentation and add JSDoc comments throughout the codebase ([6a7c999](https://github.com/orion-stack/orion-next-starter/commit/6a7c999d5be37a9e09ea0bc68b757f9c2b699ba7))
+- **i18n, storybook, e2e:** configure timezone and update dependencies ([500e130](https://github.com/orion-stack/orion-next-starter/commit/500e13088a4872a0f662079b9388df414493adca))
+- **package:** add docs script and improve type safety in tests ([14d943c](https://github.com/orion-stack/orion-next-starter/commit/14d943c1c051920fc8a340a2c175818af6acedd6))
+
 # [1.1.0](https://github.com/orion-stack/orion-next-starter/compare/v1.0.0...v1.1.0) (2025-11-09)
 
 ### Features
