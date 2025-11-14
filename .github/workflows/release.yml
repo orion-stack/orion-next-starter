@@ -14,17 +14,15 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
-    # 1. ADD THIS PERMISSIONS BLOCK HERE
     permissions:
-      contents: write # This is the crucial line!
-      issues: write # Recommended for creating/updating GitHub releases
-      pull-requests: write # Recommended for creating/updating GitHub releases
+      contents: write
+      issues: write
+      pull-requests: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          # Required for semantic-release/git to analyze history and commit/push back
           fetch-depth: 0
 
       - name: Enable Corepack
@@ -40,7 +38,6 @@ jobs:
         run: yarn install --immutable
 
       - name: Run Semantic Release
-        run: npx semantic-release
+        run: yarn semantic-release
         env:
-          # GITHUB_TOKEN is mandatory for this workflow
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

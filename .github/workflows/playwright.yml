@@ -1,29 +1,44 @@
 name: Playwright Tests
+
 on:
-  push:
-    branches: [main, dev]
-  pull_request:
-    branches: [main, dev]
+  workflow_run:
+    workflows: ["Build & Test"]
+    types:
+      - completed
+    branches:
+      - main
+      - dev
+
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
       - name: Enable Corepack
         run: corepack enable
+
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "yarn"
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps
+
       - name: Build
         run: yarn build
         env:
           NODE_ENV: production
+
       - name: Run Playwright tests
         run: |
           # Start the production server in the background
@@ -34,6 +49,7 @@ jobs:
           yarn test:e2e:ci
         env:
           CI: true
+
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
