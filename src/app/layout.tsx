@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import { Providers } from "@/providers";
-import { getMessages, getLocale } from "next-intl/server";
+import { getMessages, getLocale, getTimeZone } from "next-intl/server";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -61,13 +61,14 @@ export default async function RootLayout({
   // side is the easiest way to get started
   const messages = await getMessages();
   const locale = await getLocale();
+  const timeZone = await getTimeZone();
 
   return (
     <html lang={locale}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers messages={messages} locale={locale}>
+        <Providers messages={messages} locale={locale} timeZone={timeZone}>
           {children}
         </Providers>
       </body>

@@ -8,11 +8,21 @@ type Props = {
   children: ReactNode;
   messages: Record<string, unknown>;
   locale?: string; // Add optional locale prop
+  timeZone?: string;
 };
 
-export const Providers = ({ children, messages, locale = "en" }: Props) => {
+export const Providers = ({
+  children,
+  messages,
+  locale = "en",
+  timeZone,
+}: Props) => {
   return (
-    <NextIntlClientProvider messages={messages} locale={locale}>
+    <NextIntlClientProvider
+      messages={messages}
+      locale={locale}
+      timeZone={timeZone}
+    >
       <ThemeProvider
         attribute="class"
         defaultTheme="system"
