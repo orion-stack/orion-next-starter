@@ -1,3 +1,9 @@
+## [1.2.1](https://github.com/orion-stack/orion-next-starter/compare/v1.2.0...v1.2.1) (2025-11-14)
+
+### Bug Fixes
+
+- **storybook:** update configuration to remove MDX pattern and docs addon ([c7036dd](https://github.com/orion-stack/orion-next-starter/commit/c7036ddef60253b9f41f9442c3c0522b2c551123))
+
 # [1.2.0](https://github.com/orion-stack/orion-next-starter/compare/v1.1.0...v1.2.0) (2025-11-14)
 
 ### Features
