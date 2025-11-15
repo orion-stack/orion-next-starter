@@ -4,9 +4,10 @@
  */
 const config = {
   plugins: {
-    // Integrates Tailwind CSS with PostCSS.
+    // Integrates Tailwind CSS v4 with PostCSS.
     // This plugin is responsible for processing Tailwind directives and optimizing the CSS.
     "@tailwindcss/postcss": {},
+    autoprefixer: {},
   },
 };
 
