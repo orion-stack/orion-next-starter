@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/orion-stack/orion-next-starter/compare/v1.2.1...v1.2.2) (2025-11-15)
+
+### Bug Fixes
+
+- **build:** add sass and postcss dependencies for Vercel deployment ([da42d9a](https://github.com/orion-stack/orion-next-starter/commit/da42d9ad69332ddcee510aeaa6f8434a466f82d7))
+- **storybook:** resolve storybook configuration issues ([037057d](https://github.com/orion-stack/orion-next-starter/commit/037057d00b9be7102ca3170fb2ca38fb4411c1f9))
+
 ## [1.2.1](https://github.com/orion-stack/orion-next-starter/compare/v1.2.0...v1.2.1) (2025-11-14)
 
 ### Bug Fixes
