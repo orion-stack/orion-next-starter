@@ -17,6 +17,9 @@ const nextConfig: NextConfig = {
        domains: ['example.com'],
      },
   */
+  sassOptions: {
+    includePaths: ["./src/styles"],
+  },
 };
 
 // Wrap the Next.js configuration with the next-intl plugin to enable i18n routing and features.
